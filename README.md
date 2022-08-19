@@ -34,8 +34,7 @@ Nick Esparza, Alys Cooper
     - material name
     - description
     - image
-    - sale price yr 1
-    - sale price yr 2+
+    - sale price
     - link to wiki page
 * Crafting Recipes 
     - name
