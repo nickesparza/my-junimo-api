@@ -3,6 +3,10 @@
 # Summary: 
 Finally, an app that makes resource and crafting management easy in Stardew Valley! This app allows you to manage the inventory of your character(s) and easily see if your inventory meets the requirements for crafting items (and larger projects!) inside Stardew Valley.
 
+# Technologies Used
+Django/SQL Backend (Python)
+React Frontend
+
 # Link to Client Side
 https://github.com/alysvolatile/my-Junimo-Client
 
@@ -10,7 +14,7 @@ https://github.com/alysvolatile/my-Junimo-Client
 Nick Esparza, Alys Cooper
 
 # External API/Seed Data Used
-* Twitter API (<a href='https://developer.twitter.com/en/products/twitter-api'>here</a<>>) to link to recent tweets from Stardew Valley developer ConcernedApe.
+* Twitter API (<a href='https://developer.twitter.com/en/products/twitter-api'>here</a>) to link to recent tweets from Stardew Valley developer ConcernedApe.
 * Seed Data taken from the <a href='https://stardewvalleywiki.com/'>Stardew Valley Wiki</a>.
 
 # ERDs
