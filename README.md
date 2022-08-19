@@ -17,9 +17,10 @@ Nick Esparza, Alys Cooper
 <img src='./my-junimo-helper-erd.png' max-width='800px'/>
 
 # MVP MODELS (listed in ERD as well)
-* User (for player) - name, platform
+* User (for player) - name
 * Characters (one to many from user to characters; 'saves') (fully crudable) (user can have many saves)
     - Name
+    - Platform
     - Farm Type
     - Pet Type
     - Pet Name
@@ -78,7 +79,7 @@ Nick Esparza, Alys Cooper
 | GET    | `/view-crafting-recipes`        | `crafting-recipes#view`   |
 | GET    | `/view-all-crafting-recipes`        | `crafting-recipes#view-all`   |
 
-### CONSTRUCTION BLUEPRINT route table
+### STRETCH GOAL - CONSTRUCTION BLUEPRINT route table
 
 | Verb   | URI Pattern            | Controller#Action |
 |--------|------------------------|-------------------|
