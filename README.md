@@ -14,7 +14,7 @@ Nick Esparza, Alys Cooper
 * Seed Data taken from the <a href='https://stardewvalleywiki.com/'>Stardew Valley Wiki</a>.
 
 # ERDs
-<img src='./my-junimo-helper-erd.png' />
+<img src='./my-junimo-helper-erd.png' max-width='800px'/>
 
 # MVP MODELS (listed in ERD as well)
 * User (for player) - name, platform
