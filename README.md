@@ -20,9 +20,12 @@ Nick Esparza, Alys Cooper
 # ERDs
 <img src='./my-junimo-helper-erd.png' max-width='800px'/>
 
+# Whiteboarding of SQL relationships
+<img src='./SQL_relationship_diagram.jpg' max-width='800px'/>
+
 # MVP MODELS (listed in ERD as well)
 * User (for player) - name
-* Characters (one to many from user to characters; 'saves') (fully crudable) (user can have many saves)
+* Characters Table - (one to many from user to characters; 'saves') (fully crudable) 
     - Name
     - Platform
     - Farm Type
@@ -31,19 +34,27 @@ Nick Esparza, Alys Cooper
     - Pet image (if cat, choose cat images; if dog, choose dog images - are there pigs too?)
     - Love Interest/Spouse
     - Horse Name
-    - Inventory to hold MATERIALS, plural (foreign key, would this be many to many?) (many characters can have inventory), amount in inventory (an array of dictionaries, referencing FK of materials and a number of those materials currently in inventory)
     - Total G
     - Year
-* Material
+* Materials Table
     - material name
     - description
     - image
     - sale price
     - link to wiki page
-* Crafting Recipes 
+* Inventory Table
+    - ref Character id
+    - ref Material id
+    - Amount 
+* Crafting Recipes Table
     - name
-    - required material array(?)
     - processor needed (eg. forge, kiln)
+* Blueprint Materials Table
+    - ref Crafting Recipe id
+    - ref Material id
+    - Amount needed
+
+
 * STRETCH GOAL - Construction projects from Robin 
     - name
     - cost
