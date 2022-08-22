@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
-from .models import Character, Resource, Blueprint, Inventory, RecipeMaterials
+from .models import Character, Resource, Blueprint, Inventory, RecipeMaterial
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status

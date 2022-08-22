@@ -108,6 +108,8 @@ class Character(models.Model):
             MinValueValidator(1),
         ]
     )
+    def __str__(self):
+        return self.name
 
 # * Materials Table
 #     - material name
@@ -127,6 +129,8 @@ class Resource(models.Model):
         ]
     )
     link_to_wiki = models.CharField(max_length=150)
+    def __str__(self):
+        return self.resource_name
 
 # * Crafting Recipes Table
 #     - name
@@ -141,13 +145,27 @@ class Blueprint(models.Model):
     image = models.CharField(max_length=150)
     processor_needed = models.CharField(max_length=50)
     link_to_wiki = models.CharField(max_length=150)
+    def __str__(self):
+        return self.recipe_name
 
 class Inventory(models.Model):
     character_id = models.ForeignKey(Character, on_delete=models.CASCADE)
     resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
     amount = models.IntegerField()
+    def __str__(self):
+        return ("{}'s {}".format(self.character_id, self.resource_id) )
 
-class RecipeMaterials(models.Model):
+
+# class RecipeMaterials(models.Model):
+#     resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
+#     blueprint_id = models.ForeignKey(Blueprint, on_delete=models.CASCADE)
+#     amount_needed = models.IntegerField()
+#     def __str__(self):
+#         return self.name
+
+class RecipeMaterial(models.Model):
     resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
     blueprint_id = models.ForeignKey(Blueprint, on_delete=models.CASCADE)
     amount_needed = models.IntegerField()
+    def __str__(self):
+        return ("{} for {}".format(self.resource_id, self.blueprint_id) )
