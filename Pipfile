@@ -4,9 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-psycopg2-binary = "*"
-djangorestframework = "*"
 django-rest-auth = "*"
 django-cors-headers = "*"
 python-dotenv = "*"

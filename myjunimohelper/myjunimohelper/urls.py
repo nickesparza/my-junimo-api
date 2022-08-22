@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from junimoDatabase.views import SignUp, SignIn, SignOut, ChangePassword
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Add the line below
-    path('', include('myjunimohelperbackend.urls'))
+    path('', include('myjunimohelperbackend.urls')),
+    #bring users over
+    path('users/sign-up/', SignUp.as_view(), name='sign-up'),
+    path('users/sign-in/', SignIn.as_view(), name='sign-in'),
+    path('users/sign-out/', SignOut.as_view(), name='sign-out'),
+    path('users/change-pw/', ChangePassword.as_view(), name='change-pw'),
 ]
