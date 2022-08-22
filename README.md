@@ -100,4 +100,3 @@ Nick Esparza, Alys Cooper
 |--------|------------------------|-------------------|
 | GET    | `/view-blueprint`        | `blueprints#view`   |
 | GET    | `/view-all-blueprints`        | `blueprints#view-all`   |
-
