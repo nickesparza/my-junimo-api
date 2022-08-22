@@ -55,7 +55,7 @@ class CharacterDetail(generics.RetrieveUpdateDestroyAPIView):
         """Delete request"""
         # Locate mango to delete
         character = get_object_or_404(Character, pk=pk)
-        # Check the mango's owner against the user making this request
+        # Check the characters's owner against the user making this request
         if request.user != character.owner:
             raise PermissionDenied('Unauthorized, you do not own this character')
         # Only delete if the user owns the character

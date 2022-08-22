@@ -1,8 +1,17 @@
+# from importlib.resources import Resource
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.db import models
+
+from JunimoDatabaseApp.serializers import BlueprintSerializer
 
 from .models.user import User
 from .models.character import Character
+from .models.resource import Resource
+from .models.blueprint import Blueprint
+# from .models.recipe_material import RecipeMaterial
+# from .models.inventory import Inventory
+
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['id']
@@ -15,17 +24,17 @@ class UserAdmin(BaseUserAdmin):
     # fieldset including the list of fields.
     # Below we're saying create 4 sections, the first section has no name specified
     fieldsets = (
-      (None, {'fields': ('email', 'password')}),
-      ('Permissions',
-          {
-              'fields': (
-                  'is_active',
-                  'is_staff',
-                  'is_superuser',
-              )
-          }
-      ),
-      ('Dates', {'fields': ('last_login',)}),
+        (None, {'fields': ('email', 'password')}),
+        ('Permissions',
+            {
+                'fields': (
+                    'is_active',
+                    'is_staff',
+                    'is_superuser',
+                )
+            }
+        ),
+        ('Dates', {'fields': ('last_login',)}),
     )
     # add_fieldsets is similar to fieldsets but it is used specifically
     # when you create a new user:
@@ -40,3 +49,9 @@ class UserAdmin(BaseUserAdmin):
 # class to format the pages:
 admin.site.register(User, UserAdmin)
 admin.site.register(Character)
+admin.site.register(Resource)
+admin.site.register(Blueprint)
+# admin.site.register(RecipeMaterial)
+# admin.site.register(Inventory)
+
+
