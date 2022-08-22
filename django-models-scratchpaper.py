@@ -103,11 +103,10 @@ class Character(models.Model):
     year = models.IntegerField(
         default=1,
         validators=[
-            MaxValueValidator(1000),
+            MaxValueValidator(2147483647),
             MinValueValidator(1),
         ]
     )
-
 
 # * Materials Table
 #     - material name
@@ -143,7 +142,11 @@ class Blueprint(models.Model):
     link_to_wiki = models.CharField(max_length=150)
 
 class Inventory(models.Model):
-
+    character_id = models.ForeignKey(Character, on_delete=models.CASCADE)
+    resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    amount = models.IntegerField()
 
 class RecipeMaterials(models.Model):
-    
+    resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    blueprint_id = models.ForeignKey(Blueprint, on_delete=models.CASCADE)
+    amount_needed = models.IntegerField()

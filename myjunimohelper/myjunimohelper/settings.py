@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # our apps!
-    'myjunimohelperbackend'
+    'myjunimohelperbackend',
+    'junimoDatabase',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
