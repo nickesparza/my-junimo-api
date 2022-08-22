@@ -1,3 +1,4 @@
+from ast import Pass
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -14,6 +15,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 #     - Horse Name (string)
 #     - Total G
 #     - Year 
+
+class User(models.Model):
+    Pass
 
 class Character(models.Model):
     # we will use these constants for the pets later on
@@ -76,6 +80,7 @@ class Character(models.Model):
         (DOG3, 'Dog 3'),
     ]
     # and now for the models
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=12)
     Platform = models.CharField(max_length=30)
     farm_name = models.CharField(max_length=12)
