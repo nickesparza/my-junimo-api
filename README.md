@@ -26,16 +26,16 @@ Nick Esparza, Alys Cooper
 # MVP MODELS (listed in ERD as well)
 * User (for player) - name
 * Characters Table - (one to many from user to characters; 'saves') (fully crudable) 
-    - Name
-    - Platform
-    - Farm Type
-    - Pet Type
-    - Pet Name
-    - Pet image (if cat, choose cat images; if dog, choose dog images - are there pigs too?)
-    - Love Interest/Spouse
-    - Horse Name
+    - Name (string)
+    - Platform (string)
+    - Farm Type (string)
+    - Pet Type (string)
+    - Pet Name (string)
+    - Pet image (if cat, choose cat images; if dog, choose dog images - are there pigs too?) (string)
+    - Love Interest/Spouse (string)
+    - Horse Name (string)
     - Total G
-    - Year
+    - Year 
 * Materials Table
     - material name
     - description
@@ -48,6 +48,7 @@ Nick Esparza, Alys Cooper
     - Amount 
 * Crafting Recipes Table
     - name
+    - description
     - processor needed (eg. forge, kiln)
 * Blueprint Materials Table
     - ref Crafting Recipe id
