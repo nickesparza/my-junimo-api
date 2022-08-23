@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import generics, status
 from django.shortcuts import get_object_or_404
+from django.middleware.csrf import get_token
 
 from JunimoDatabaseApp.models import resource
 from ..models.resource import Resource
