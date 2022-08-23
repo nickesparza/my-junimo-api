@@ -15,4 +15,3 @@ class Resource(models.Model):
     link_to_wiki = models.CharField(max_length=150)
     def __str__(self):
         return self.resource_name
-
