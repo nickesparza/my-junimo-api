@@ -8,39 +8,48 @@ from django.middleware.csrf import get_token
 from JunimoDatabaseApp.models import resource
 from ..models.blueprint import Blueprint
 from ..models.resource import Resource
+from ..models.recipe_material import RecipeMaterial
 from ..serializers import RecipeMaterialSerializer
 from .blueprint_views import BlueprintDetail
 
 # Create your views here.
 
 # this will return all recipe materials that match one blueprint
-class RecipeMaterials(generics.ListCreateAPIView):
-    serializer_class = RecipeMaterialSerializer(many=True)
+class RecipeMaterialsView(generics.ListCreateAPIView):
+    serializer_class = RecipeMaterialSerializer
     authentication_classes = ()
     permission_classes = ()
-    objects = models.Manager()
     def get(self, request):
         """Index request"""
-        # define
-        # Get all the resources from recipe materials list
-        recipe_materials = Resource.objects.all()
-        # Run the data through the serializer
+        recipe_materials = RecipeMaterial.objects.all()
         data = RecipeMaterialSerializer(recipe_materials, many=True).data
         return Response({ 'recipe_materials': data })
+        # GET THIS SORTED FOR JOIN TABLES
+        # Get all the resources from recipe materials list
+        # recipe_materials = Resource.objects.all()
+        # # Run the data through the serializer
+        # data = RecipeMaterialSerializer(recipe_materials, many=True).data
+        # return Response({ 'recipe_materials': data })
 
 # this will return all recipe materials that match one blueprint
-class RecipeMaterialDetail(generics.RetrieveUpdateDestroyAPIView):
+class RecipeMaterialDetailView(generics.RetrieveUpdateDestroyAPIView):
     # this would limit to logged in users?
     authentication_classes = ()
     # this would limit to owned resources?
     permission_classes = ()
 #     # will need to bring over the fk for the blueprint to return materials for
-    def get(self, request, fk):
-        
+    def get(self, request, pk):
         """Show request"""
-        # Locate the resource to show
-        # blueprint = get_object_or_404(BlueprintDetail, pk=fk)
-        recipe_materials = RecipeMaterials.objects.filter(resource_id=fk)
+        recipe_material = get_object_or_404(RecipeMaterialsView, pk=pk)
+
         # Run the data through the serializer so it's formatted
-        data = RecipeMaterialSerializer(recipe_materials, many=True).data
+        data = RecipeMaterialSerializer(recipe_material).data
         return Response({ 'recipe_materials': data })
+
+        # Locate the resource to show
+        # GET THIS SORTED FOR JOIN TABLES
+        # # blueprint = get_object_or_404(BlueprintDetail, pk=fk)
+        # recipe_materials = RecipeMaterials.objects.filter(resource_id=fk)
+        # # Run the data through the serializer so it's formatted
+        # data = RecipeMaterialSerializer(recipe_materials, many=True).data
+        # return Response({ 'recipe_materials': data })
