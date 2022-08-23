@@ -11,7 +11,7 @@
 # from ..serializers import CharacterSerializer
 # from ..serializers import InventorySerializer
 
-# # 
+# # We will not need an inventory index page 
 
 # # Create your views here.
 # class Inventories(generics.ListCreateAPIView):

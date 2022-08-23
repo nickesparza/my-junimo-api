@@ -10,6 +10,8 @@ from ..serializers import ResourceSerializer
 # Create your views here.
 class Resources(generics.ListCreateAPIView):
     serializer_class = ResourceSerializer
+    authentication_classes = ()
+    permission_classes = ()
     def get(self, request):
         """Index request"""
         # Get all the resources:
@@ -20,6 +22,8 @@ class Resources(generics.ListCreateAPIView):
 
 
 class ResourceDetail(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = ()
+    permission_classes = ()
     def get(self, request, pk):
         """Show request"""
         # Locate the resource to show

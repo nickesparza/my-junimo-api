@@ -9,6 +9,8 @@ from ..serializers import BlueprintSerializer
 # Create your views here.
 class Blueprints(generics.ListCreateAPIView):
     serializer_class = BlueprintSerializer
+    authentication_classes = ()
+    permission_classes = ()
     def get(self, request):
         """Index request"""
         # Get all the resources:
@@ -19,6 +21,8 @@ class Blueprints(generics.ListCreateAPIView):
 
 
 class BlueprintDetail(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = ()
+    permission_classes = ()
     def get(self, request, pk):
         """Show request"""
         # Locate the resource to show
