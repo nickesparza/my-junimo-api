@@ -3,7 +3,7 @@ import os
 from ..models.recipe_material import RecipeMaterial
 
 def run():
-    file = open('JunimoDatabaseApp/scripts/recipematerial.csv')
+    file = open('JunimoDatabaseApp/scripts/recipe_materials.csv')
     read_file=csv.reader(file)
 
     #optional - clears database of existing values
