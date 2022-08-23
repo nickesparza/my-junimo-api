@@ -9,7 +9,7 @@ from .models.user import User
 from .models.character import Character
 from .models.resource import Resource
 from .models.blueprint import Blueprint
-# from .models.recipe_material import RecipeMaterial
+from .models.recipe_material import RecipeMaterial
 # from .models.inventory import Inventory
 
 
@@ -51,7 +51,7 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Character)
 admin.site.register(Resource)
 admin.site.register(Blueprint)
-# admin.site.register(RecipeMaterial)
+admin.site.register(RecipeMaterial)
 # admin.site.register(Inventory)
 
 
