@@ -1,6 +1,6 @@
 # from django.db import models
 
-# from models import Character, Resource
+# from JunimoDatabaseApp.models import Character, Resource
 
 # # Create your models here.
 # class Inventory(models.Model):

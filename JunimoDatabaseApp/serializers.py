@@ -26,7 +26,7 @@ class ResourceSerializer(serializers.ModelSerializer):
 class BlueprintSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blueprint
-        fields = '__all__'
+        fields = ('recipe_name', 'recipe_description', 'image', 'processor_needed', 'link_to_wiki')
 
 # class InventorySerializer(serializers.ModelSerializer):
 #     class Meta:
