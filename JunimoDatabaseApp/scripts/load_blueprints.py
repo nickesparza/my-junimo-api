@@ -18,5 +18,5 @@ def run():
             pass
         else:
             print(blueprint) #optional
-            Blueprint.objects.create(recipe_name=blueprint[0], recipe_description=blueprint[1], image=blueprint[2], processor_needed=blueprint[3], link_to_wiki=blueprint[4])
+            Blueprint.objects.create(recipe_name=blueprint[0], recipe_description=blueprint[1], recipe_image=blueprint[2], processor_needed=blueprint[3], link_to_wiki=blueprint[4])
         count=count+1

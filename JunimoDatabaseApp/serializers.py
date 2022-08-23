@@ -34,6 +34,8 @@ class ResourceSerializer(serializers.ModelSerializer):
 #         fields = '__all__'
 
 class RecipeMaterialSerializer(serializers.ModelSerializer):
+    # resource_serializer = ResourceSerializer(many=False, required=False)
+    # blueprint_serializer = BlueprintSerializer(many=False, required=False)
     class Meta:
         model = RecipeMaterial
         fields = '__all__'

@@ -18,5 +18,5 @@ def run():
             pass
         else:
             print(resource) #optional
-            Resource.objects.create(resource_name=resource[0], description=resource[1], image=resource[2], sale_price=resource[3], link_to_wiki=resource[4])
+            Resource.objects.create(resource_name=resource[0], resource_description=resource[1], resource_image=resource[2], sale_price=resource[3], link_to_wiki=resource[4])
         count=count+1
