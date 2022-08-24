@@ -18,7 +18,7 @@ Nick Esparza, Alys Cooper
 * Seed Data taken from the <a href='https://stardewvalleywiki.com/'>Stardew Valley Wiki</a>.
 
 # ERDs
-<img src='./Images/my-junimo-helper-erd.png' max-width='800px'/>
+<img src='.my-junimo-helper-erd.png' max-width='800px'/>
 
 # Whiteboarding of SQL relationships
 <img src='./Images/SQL_relationship_diagram.jpg' max-width='800px'/>
@@ -100,3 +100,13 @@ Nick Esparza, Alys Cooper
 |--------|------------------------|-------------------|
 | GET    | `/view-blueprint`        | `blueprints#view`   |
 | GET    | `/view-all-blueprints`        | `blueprints#view-all`   |
+
+# How to seed the database!
+
+We have provided seed data for all materials and blueprints, as well as provided a seed TEMPLATE for inventory and recipe_materials. Please note the word TEMPLATE: since the recipe_material and template models both rely heavily on referencing other models existing in the database, some delicacy is required if you'd like to seed things with a csv. However, it is easy to do so with a little help! Here is that help.
+
+## Seeding Materials
+* In the terminal, run ```python manage.py runscript load_resources```. This will seed the database with materials.
+* In the terminal, run ```python manage.py runscript load_blueprints```. This will seed the database with blueprints!
+* From there, run a GET request to get the primary keys and names for all materials and blueprints. 
+* TODO: create a helper csv file for inventory and recipe_materials.
