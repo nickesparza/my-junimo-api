@@ -16,6 +16,7 @@ urlpatterns = [
     path('materials/', Materials.as_view(), name='materials'),
     path('materials/<int:pk>/', MaterialDetail.as_view(), name='material_detail'),
     path('recipe_materials/<int:pk>/', RecipeMaterialsView.as_view(), name='recipe_materials'),
+    path('recipe_materials/show/<int:pk>', RecipeMaterialDetailView.as_view(), name='single_recipe_material'),
     path('inventory/<int:pk>/', InventoryDetail.as_view(), name='inventory'),
     path('sign-up/', SignUp.as_view(), name='sign-up'),
     path('sign-in/', SignIn.as_view(), name='sign-in'),

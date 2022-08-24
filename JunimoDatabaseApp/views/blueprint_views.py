@@ -21,6 +21,7 @@ class BlueprintView(generics.ListCreateAPIView):
 
 
 class BlueprintDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = BlueprintSerializer
     authentication_classes = ()
     permission_classes = ()
     def get(self, request, pk):

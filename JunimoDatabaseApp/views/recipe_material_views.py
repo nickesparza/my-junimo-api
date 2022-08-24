@@ -25,18 +25,15 @@ class RecipeMaterialsView(generics.ListCreateAPIView):
         data = RecipeMaterialSerializer(recipe_materials, many=True).data
         return Response({ 'recipe_materials': data })
 
-# this will return all recipe materials that match one blueprint
+# this should return ONE recipe material based on pk (recipe material)
 class RecipeMaterialDetailView(generics.RetrieveUpdateDestroyAPIView):
     # this would limit to logged in users?
     serializer_class = RecipeMaterialSerializer
     authentication_classes = ()
-    # this would limit to owned resources?
     permission_classes = ()
-#     # will need to bring over the fk for the blueprint to return materials for
     def get(self, request, pk):
         """Show request"""
         recipe_material = get_object_or_404(RecipeMaterial, pk=pk)
-
         # Run the data through the serializer so it's formatted
         data = RecipeMaterialSerializer(recipe_material).data
         return Response({ 'recipe_materials': data })
