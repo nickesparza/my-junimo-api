@@ -22,6 +22,7 @@ class Materials(generics.ListCreateAPIView):
 
 
 class MaterialDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = MaterialSerializer
     authentication_classes = ()
     permission_classes = ()
     def get(self, request, pk):

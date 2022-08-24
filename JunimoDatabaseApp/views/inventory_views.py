@@ -3,9 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import generics, status
 from django.shortcuts import get_object_or_404
-
-from JunimoDatabaseApp.models import character
-
+# from JunimoDatabaseApp.models import character
 from ..models.character import Character
 from ..models.inventory import Inventory
 from ..serializers import CharacterSerializer
@@ -46,7 +44,7 @@ class InventoryView(generics.ListCreateAPIView):
     #     return Response(character.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# need to return an index for inventory conncected to ONE CHARACTER
+# this returns an index for all inventory items conncected to ONE CHARACTER
 class InventoryDetail(generics.ListCreateAPIView):
     permission_classes=(IsAuthenticated,)
     def get(self, request, pk):

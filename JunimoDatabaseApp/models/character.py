@@ -48,11 +48,6 @@ class Character(models.Model):
         (PENNY, 'Penny'),
         (KROBUS, 'Krobus'),
     ]
-    # this defines the pet choices later on
-    PET_TYPE_CHOICES = [
-        (CAT, 'Cat'),
-        (DOG, 'Dog'),
-    ]
     # and these are for the pet urls
     CAT1 = 'C1'
     CAT2 = 'C2'
