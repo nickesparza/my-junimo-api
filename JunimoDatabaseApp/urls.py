@@ -2,7 +2,7 @@ from django.urls import path
 
 from JunimoDatabaseApp.views.blueprint_views import Blueprints, BlueprintDetail
 from .views.character_views import Characters, CharacterDetail
-from .views.resource_views import Resources, ResourceDetail
+from .views.material_views import Materials, MaterialDetail
 from .views.recipe_material_views import RecipeMaterialDetailView, RecipeMaterialsView
 from .views.user_views import SignUp, SignIn, SignOut, ChangePassword
 
@@ -12,8 +12,8 @@ urlpatterns = [
     path('characters/<int:pk>/', CharacterDetail.as_view(), name='character_detail'),
     path('blueprints/', Blueprints.as_view(), name='blueprints'),
     path('blueprints/<int:pk>/', BlueprintDetail.as_view(), name='blueprint_detail'),
-    path('resources/', Resources.as_view(), name='resources'),
-    path('resources/<int:pk>/', ResourceDetail.as_view(), name='resource_detail'),
+    path('materials/', Materials.as_view(), name='materials'),
+    path('materials/<int:pk>/', MaterialDetail.as_view(), name='material_detail'),
     path('recipe_materials/', RecipeMaterialsView.as_view(), name='recipe_materials'),
     path('recipe_materials/<int:fk>/', RecipeMaterialDetailView.as_view(), name='recipe_materials'),
     path('sign-up/', SignUp.as_view(), name='sign-up'),

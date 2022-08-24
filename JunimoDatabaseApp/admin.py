@@ -1,4 +1,4 @@
-# from importlib.resources import Resource
+from importlib.resources import Resource
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.db import models
@@ -7,10 +7,10 @@ from JunimoDatabaseApp.serializers import BlueprintSerializer
 
 from .models.user import User
 from .models.character import Character
-from .models.resource import Resource
+from .models.material import Material
 from .models.blueprint import Blueprint
 from .models.recipe_material import RecipeMaterial
-# from .models.inventory import Inventory
+from .models.inventory import Inventory
 
 
 class UserAdmin(BaseUserAdmin):
@@ -49,9 +49,9 @@ class UserAdmin(BaseUserAdmin):
 # class to format the pages:
 admin.site.register(User, UserAdmin)
 admin.site.register(Character)
-admin.site.register(Resource)
+admin.site.register(Material)
 admin.site.register(Blueprint)
 admin.site.register(RecipeMaterial)
-# admin.site.register(Inventory)
+admin.site.register(Inventory)
 
 

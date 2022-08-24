@@ -1,10 +1,10 @@
 from django.db import models
 from ..models.blueprint import Blueprint
-from ..models.resource import Resource
+from .material import Material
 
 # Create your models here.
 class RecipeMaterial(models.Model):
-    resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    material_id = models.ForeignKey(Material, on_delete=models.CASCADE)
     blueprint_id = models.ForeignKey(Blueprint, on_delete=models.CASCADE)
     amount_needed = models.IntegerField()
     def __str__(self):

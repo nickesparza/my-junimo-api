@@ -4,8 +4,6 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework import generics, status
 from django.shortcuts import get_object_or_404
 
-from JunimoDatabaseApp.models import character
-
 from ..models.character import Character
 from ..serializers import CharacterSerializer
 
@@ -27,11 +25,11 @@ class Characters(generics.ListCreateAPIView):
         """Create request"""
         # Add user to request data object
         request.data['character']['owner'] = request.user.id
-        # Serialize/create mango
-        mango = CharacterSerializer(data=request.data['character'])
-        # If the mango data is valid according to our serializer...
+        # Serialize/create character
+        character = CharacterSerializer(data=request.data['character'])
+        # If the character data is valid according to our serializer...
         if character.is_valid():
-            # Save the created mango & send a response
+            # Save the created character & send a response
             character.save()
             return Response({ 'character': character.data }, status=status.HTTP_201_CREATED)
         # If the data is not valid, return a response with the errors
@@ -41,7 +39,7 @@ class CharacterDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=(IsAuthenticated,)
     def get(self, request, pk):
         """Show request"""
-        # Locate the mango to show
+        # Locate the character to show
         character = get_object_or_404(Character, pk=pk)
         # Only want to show owned characters?
         if request.user != character.owner:
@@ -53,7 +51,7 @@ class CharacterDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def delete(self, request, pk):
         """Delete request"""
-        # Locate mango to delete
+        # Locate character to delete
         character = get_object_or_404(Character, pk=pk)
         # Check the characters's owner against the user making this request
         if request.user != character.owner:

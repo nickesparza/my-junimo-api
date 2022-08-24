@@ -1,22 +1,22 @@
 import csv
 import os
-from ..models.resource import Resource
+from ..models.material import Material
 
 def run():
     file = open('JunimoDatabaseApp/scripts/resources.csv')
     read_file=csv.reader(file)
 
     #optional - clears database of existing values
-    Resource.objects.all().delete()
+    Material.objects.all().delete()
 
     #to avoid header values being added in accidentally
     count = 1 
 
     # add in resources from csv
-    for resource in read_file:
+    for material in read_file:
         if count==1:
             pass
         else:
-            print(resource) #optional
-            Resource.objects.create(resource_name=resource[0], resource_description=resource[1], resource_image=resource[2], sale_price=resource[3], link_to_wiki=resource[4])
+            print(material) #optional
+            Material.objects.create(material_name=material[0], material_description=material[1], material_image=material[2], sale_price=material[3], link_to_wiki=material[4])
         count=count+1

@@ -2,11 +2,12 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from .models.character import Character
-from .models.resource import Resource
+from .models.material import Material
 from .models.blueprint import Blueprint
-# from .models.inventory import Inventory
+from .models.inventory import Inventory
 from .models.recipe_material import RecipeMaterial
 from .models.user import User
+from JunimoDatabaseApp.models import material
 
 # class MangoSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -23,22 +24,27 @@ class BlueprintSerializer(serializers.ModelSerializer):
         model = Blueprint
         fields = '__all__'
 
-class ResourceSerializer(serializers.ModelSerializer):
+class MaterialSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Resource
+        model = Material
         fields = '__all__'
 
-# class InventorySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Inventory
-#         fields = '__all__'
+
+# for serializer
+# character name, character id, resource name, resource id, resource image, amount
+class InventorySerializer(serializers.ModelSerializer):
+    material = MaterialSerializer(source='material_id')
+    character = CharacterSerializer(source='character_id')
+    class Meta:
+        model = Inventory
+        fields = ('material', 'character', 'amount', 'id')
 
 class RecipeMaterialSerializer(serializers.ModelSerializer):
-    # resource_serializer = ResourceSerializer(many=False, required=False)
-    # blueprint_serializer = BlueprintSerializer(many=False, required=False)
+    material = MaterialSerializer(source='material_id')
+    blueprint = BlueprintSerializer(source='blueprint_id')
     class Meta:
         model = RecipeMaterial
-        fields = '__all__'
+        fields = ('material', 'blueprint', 'amount_needed', 'id')
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation

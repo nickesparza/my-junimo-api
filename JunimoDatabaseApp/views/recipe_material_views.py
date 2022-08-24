@@ -5,9 +5,9 @@ from django.db import models
 from django.shortcuts import get_object_or_404
 from django.middleware.csrf import get_token
 
-from JunimoDatabaseApp.models import resource
+from JunimoDatabaseApp.models import material
 from ..models.blueprint import Blueprint
-from ..models.resource import Resource
+from ..models.material import Material
 from ..models.recipe_material import RecipeMaterial
 from ..serializers import RecipeMaterialSerializer
 from .blueprint_views import BlueprintDetail
