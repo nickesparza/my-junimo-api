@@ -8,5 +8,5 @@ class RecipeMaterial(models.Model):
     blueprint_id = models.ForeignKey(Blueprint, on_delete=models.CASCADE)
     amount_needed = models.IntegerField()
     def __str__(self):
-        return ("{} for {}".format(self.resource_id, self.blueprint_id) )
+        return ("{} for {}".format(self.material_id, self.blueprint_id) )
 
