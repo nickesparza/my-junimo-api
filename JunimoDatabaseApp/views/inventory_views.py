@@ -13,19 +13,23 @@ from ..serializers import InventorySerializer
 
 # Create your views here.
 
-# not needed - we ONLY need to return an index for inventory connected to ONE CHARACTER
-class InventoryView(generics.ListCreateAPIView):
+# this will return ONE inventory entry for ONE character
+class ShowInventoryView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=(IsAuthenticated,)
     serializer_class = InventorySerializer
-    def get(self, request):
+    def get(self, request, pk, fk):
         """Index request"""
-        # Filter the characters by owner, so you can only see your owned characters
-        characters = Character.objects.filter(owner=request.user.id)
+        # # Filter the characters by owner, so you can only see your owned characters
+        character = get_object_or_404(Character, pk=fk)
+        # Only do request if they own the character whose inventory it is
+        if request.user != character.owner:
+            raise PermissionDenied('Unauthorized, you do not own this character')
+        # characters = get_object_or_404(Character, pk=fk)
         # Filter the inventories by character, so you can only see your owned inventories
-        inventories = Inventory.objects.filter(character_id=characters)
+        inventory = get_object_or_404(Inventory, pk=pk, character_id=fk)
         # Run the data through the serializer
-        data = InventorySerializer(inventories, many=True).data
-        return Response({ 'inventories': data })
+        data = InventorySerializer(inventory).data
+        return Response({ 'inventory': data })
 
 # TODO: GET THIS SORTED
 # we will create each character with inventory of all materials  
@@ -60,7 +64,7 @@ class InventoryDetail(generics.ListCreateAPIView):
         data = InventorySerializer(inventory, many=True).data
         return Response({ 'inventory': data })
 
-    # TODO: GET THESE TWO SORTED
+    # TODO: GET THESE TWO SORTED - this should be moved up under (generics.RetrieveUpdateDestroyAPIView)
     def delete(self, request, pk):
         """Delete request"""
         # Locate mango to delete
