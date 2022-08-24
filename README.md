@@ -18,7 +18,7 @@ Nick Esparza, Alys Cooper
 * Seed Data taken from the <a href='https://stardewvalleywiki.com/'>Stardew Valley Wiki</a>.
 
 # ERDs
-<img src='.my-junimo-helper-erd.png' max-width='800px'/>
+<img src='./my-junimo-helper-erd.png' max-width='800px'/>
 
 # Whiteboarding of SQL relationships
 <img src='./Images/SQL_relationship_diagram.jpg' max-width='800px'/>
