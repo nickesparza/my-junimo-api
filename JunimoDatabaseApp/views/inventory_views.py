@@ -19,33 +19,78 @@ class ShowInventoryView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = InventorySerializer
     def get(self, request, pk, fk):
         """Index request"""
-        # # Filter the characters by owner, so you can only see your owned characters
+        # Filter the characters by owner, so you can only see your owned characters
         character = get_object_or_404(Character, pk=fk)
         # Only do request if they own the character whose inventory it is
         if request.user != character.owner:
             raise PermissionDenied('Unauthorized, you do not own this character')
-        # characters = get_object_or_404(Character, pk=fk)
         # Filter the inventories by character, so you can only see your owned inventories
         inventory = get_object_or_404(Inventory, pk=pk, character_id=fk)
         # Run the data through the serializer
         data = InventorySerializer(inventory).data
         return Response({ 'inventory': data })
 
-# TODO: GET THIS SORTED
-# we will create each character with inventory of all materials  
-    # def post(self, request):
-    #     """Create request"""
-    #     # Add user to request data object
-    #     request.data['character']['character_id'] = request.user.id
-    #     # Serialize/create inventory
-    #     inventory = CharacterSerializer(data=request.data['character'])
-    #     # If the inventory data is valid according to our serializer...
-    #     if character.is_valid():
-    #         # Save the created inventory & send a response
-    #         inventory.save()
-    #         return Response({ 'inventory': inventory.data }, status=status.HTTP_201_CREATED)
-    #     # If the data is not valid, return a response with the errors
-    #     return Response(character.errors, status=status.HTTP_400_BAD_REQUEST)
+# TODO: TEST THIS
+# create an entry in inventory
+    def post(self, request, pk, fk):
+        # this would work for patch better
+        """Create request"""
+        # Get character that you will be adding inventory item to
+        character = get_object_or_404(Character, pk=pk)
+        # Only do request if they own the character whose inventory it is
+        if request.user != character.owner:
+            raise PermissionDenied('Unauthorized, you do not own this character')
+            # If pass...
+        # Add character_id to request data object
+        # set inventory character_id
+        request.data['inventory']['character_id'] = pk
+        # set inventory material_id
+        request.data['inventory']['material_id'] = fk
+        # Serialize/create inventory
+        inventory = InventorySerializer(data=request.data['inventory'])
+        # If the inventory data is valid according to our serializer...
+        if inventory.is_valid():
+            # Save the created inventory & send a response
+            inventory.save()
+            return Response({ 'inventory': inventory.data }, status=status.HTTP_201_CREATED)
+        # If the data is not valid, return a response with the errors
+        return Response(inventory.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        # TODO: GET THESE TWO SORTED - this should be moved up under (generics.RetrieveUpdateDestroyAPIView)
+    def delete(self, request, pk):
+        """Delete request"""
+        # Locate mango to delete
+        character = get_object_or_404(Character, pk=pk)
+        # Check the characters's owner against the user making this request
+        if request.user != character.owner:
+            raise PermissionDenied('Unauthorized, you do not own this character')
+        # Only delete if the user owns the character
+        character.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    # TODO: TO TEST
+    def partial_update(self, request, pk, fk):
+        """Update Request"""
+        # Locate Character for auth
+        # get_object_or_404 returns a object representation of our Character
+        character = get_object_or_404(Character, pk=pk)
+        # Check the character's owner against the user making this request
+        if request.user != character.owner:
+            raise PermissionDenied('Unauthorized, you do not own this character')
+            # If pass...    
+        # set inventory character_id (ref with pk)
+        request.data['inventory']['character_id'] = pk
+        # set inventory material_id (ref with fk)
+        request.data['inventory']['material_id'] = fk
+        # Serialize/create inventory for validation
+        # Validate updates with serializer
+        inventory = InventorySerializer(data=request.data['inventory'])
+        if inventory.is_valid():
+            # Save & send a 204 no content
+            inventory.save()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        # If the data is not valid, return a response with the errors
+        return Response(inventory.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # this returns an index for all inventory items conncected to ONE CHARACTER
@@ -64,34 +109,4 @@ class InventoryDetail(generics.ListCreateAPIView):
         data = InventorySerializer(inventory, many=True).data
         return Response({ 'inventory': data })
 
-    # TODO: GET THESE TWO SORTED - this should be moved up under (generics.RetrieveUpdateDestroyAPIView)
-    def delete(self, request, pk):
-        """Delete request"""
-        # Locate mango to delete
-        character = get_object_or_404(Character, pk=pk)
-        # Check the characters's owner against the user making this request
-        if request.user != character.owner:
-            raise PermissionDenied('Unauthorized, you do not own this character')
-        # Only delete if the user owns the character
-        character.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def partial_update(self, request, pk):
-        """Update Request"""
-        # Locate Character
-        # get_object_or_404 returns a object representation of our Character
-        character = get_object_or_404(Character, pk=pk)
-        # Check the character's owner against the user making this request
-        if request.user != character.owner:
-            raise PermissionDenied('Unauthorized, you do not own this character')
-
-        # Ensure the owner field is set to the current user's ID
-        request.data['character']['owner'] = request.user.id
-        # Validate updates with serializer
-        data = CharacterSerializer(character, data=request.data['character'], partial=True)
-        if data.is_valid():
-            # Save & send a 204 no content
-            data.save()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        # If the data is not valid, return a response with the errors
-        return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
+    

@@ -1,3 +1,4 @@
+from ast import Pass
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
@@ -38,6 +39,18 @@ class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
         fields = ('material', 'character', 'amount', 'id')
+        # this sets the 'nested' fields above as read only
+        extra_kwargs = {
+            'material': {
+                'read_only': True
+            },
+            'character': {
+                'read_only': True
+            }
+        }
+    # This create method will be used for model creation
+    # def update(self, validated_data):
+    #     Pass
 
 class RecipeMaterialSerializer(serializers.ModelSerializer):
     material = MaterialSerializer(source='material_id')
@@ -45,6 +58,15 @@ class RecipeMaterialSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecipeMaterial
         fields = ('material', 'blueprint', 'amount_needed', 'id')
+        # this sets the 'nested' fields above as read only
+        extra_kwargs = {
+            'material': {
+                'read_only': True
+            },
+            'blueprint': {
+                'read_only': True
+            }
+        }
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation
