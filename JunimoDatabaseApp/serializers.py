@@ -10,6 +10,8 @@ from .models.recipe_material import RecipeMaterial
 from .models.user import User
 from JunimoDatabaseApp.models import material
 
+from JunimoDatabaseApp.models import inventory
+
 # class MangoSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Mango
@@ -48,9 +50,18 @@ class InventorySerializer(serializers.ModelSerializer):
                 'read_only': True
             }
         }
-    # This create method will be used for model creation
-    # def update(self, validated_data):
-    #     Pass
+    def create(self, validated_data):
+        material_validated_data = validated_data.pop('material_id')
+        character_validated_data = validated_data.pop('character_id')
+        amount_validated_data = validated_data.pop('amount')
+        print(validated_data)
+        inventory = Inventory.objects.create(**validated_data)
+        # choice_set_serializer = self.fields['choice_set']
+        # for each in choice_validated_data:
+        #     each['question'] = question
+        # choices = choice_set_serializer.create(choice_validated_data)
+        return inventory
+
 
 class RecipeMaterialSerializer(serializers.ModelSerializer):
     material = MaterialSerializer(source='material_id')
@@ -67,6 +78,7 @@ class RecipeMaterialSerializer(serializers.ModelSerializer):
                 'read_only': True
             }
         }
+
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation

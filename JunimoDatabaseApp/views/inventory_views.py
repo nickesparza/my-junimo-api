@@ -55,20 +55,7 @@ class ShowInventoryView(generics.RetrieveUpdateDestroyAPIView):
             return Response({ 'inventory': inventory.data }, status=status.HTTP_201_CREATED)
         # If the data is not valid, return a response with the errors
         return Response(inventory.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        # TODO: GET THESE TWO SORTED - this should be moved up under (generics.RetrieveUpdateDestroyAPIView)
-    def delete(self, request, pk):
-        """Delete request"""
-        # Locate mango to delete
-        character = get_object_or_404(Character, pk=pk)
-        # Check the characters's owner against the user making this request
-        if request.user != character.owner:
-            raise PermissionDenied('Unauthorized, you do not own this character')
-        # Only delete if the user owns the character
-        character.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-    # TODO: TO TEST
+        
     def partial_update(self, request, pk, fk):
         """Update Request"""
         # Locate Character for auth
@@ -92,9 +79,31 @@ class ShowInventoryView(generics.RetrieveUpdateDestroyAPIView):
         # If the data is not valid, return a response with the errors
         return Response(inventory.errors, status=status.HTTP_400_BAD_REQUEST)
 
+        # TODO: GET THESE TWO SORTED - this should be moved up under (generics.RetrieveUpdateDestroyAPIView)
+    def delete(self, request, pk):
+        """Delete request"""
+        # Locate mango to delete
+        character = get_object_or_404(Character, pk=pk)
+        # Check the characters's owner against the user making this request
+        if request.user != character.owner:
+            raise PermissionDenied('Unauthorized, you do not own this character')
+        # Only delete if the user owns the character
+        character.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-# this returns an index for all inventory items conncected to ONE CHARACTER
+
+
+
+# specifically for patch
+class InventoryPatch(generics.ListCreateAPIView):
+    serializer_class = InventorySerializer
+    permission_classes=(IsAuthenticated,)
+        # TODO: TO TEST
+
+
+# this returns an index for all inventory items connected to ONE CHARACTER
 class InventoryDetail(generics.ListCreateAPIView):
+    serializer_class = InventorySerializer
     permission_classes=(IsAuthenticated,)
     def get(self, request, pk):
         """Show request"""

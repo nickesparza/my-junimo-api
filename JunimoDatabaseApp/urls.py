@@ -5,7 +5,7 @@ from .views.character_views import Characters, CharacterDetail
 from .views.material_views import Materials, MaterialDetail
 from .views.recipe_material_views import RecipeMaterialDetailView, RecipeMaterialsView
 from .views.user_views import SignUp, SignIn, SignOut, ChangePassword
-from .views.inventory_views import ShowInventoryView, InventoryDetail
+from .views.inventory_views import InventoryPatch, ShowInventoryView, InventoryDetail
 
 urlpatterns = [
     # Restful routing
