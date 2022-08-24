@@ -7,7 +7,7 @@ from ..models.blueprint import Blueprint
 from ..serializers import BlueprintSerializer
 
 # Create your views here.
-class Blueprints(generics.ListCreateAPIView):
+class BlueprintView(generics.ListCreateAPIView):
     serializer_class = BlueprintSerializer
     authentication_classes = ()
     permission_classes = ()

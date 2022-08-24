@@ -92,7 +92,7 @@ class Character(models.Model):
         default=1,
         validators=[
             MaxValueValidator(2147483647),
-            MinValueValidator(1),
+            MinValueValidator(0),
         ]
     )
     year = models.IntegerField(

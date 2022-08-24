@@ -1,6 +1,6 @@
 from django.urls import path
 
-from JunimoDatabaseApp.views.blueprint_views import Blueprints, BlueprintDetail
+from JunimoDatabaseApp.views.blueprint_views import BlueprintView, BlueprintDetail
 from .views.character_views import Characters, CharacterDetail
 from .views.material_views import Materials, MaterialDetail
 from .views.recipe_material_views import RecipeMaterialDetailView, RecipeMaterialsView
@@ -11,13 +11,11 @@ urlpatterns = [
     # Restful routing
     path('characters/', Characters.as_view(), name='characters'),
     path('characters/<int:pk>/', CharacterDetail.as_view(), name='character_detail'),
-    path('blueprints/', Blueprints.as_view(), name='blueprints'),
+    path('blueprints/', BlueprintView.as_view(), name='blueprints'),
     path('blueprints/<int:pk>/', BlueprintDetail.as_view(), name='blueprint_detail'),
     path('materials/', Materials.as_view(), name='materials'),
     path('materials/<int:pk>/', MaterialDetail.as_view(), name='material_detail'),
-    path('recipe_materials/', RecipeMaterialsView.as_view(), name='recipe_materials'),
-    path('recipe_materials/<int:fk>/', RecipeMaterialDetailView.as_view(), name='recipe_materials'),
-    path('inventory/', InventoryView.as_view(), name='inventory_all'),
+    path('recipe_materials/<int:pk>/', RecipeMaterialsView.as_view(), name='recipe_materials'),
     path('inventory/<int:pk>/', InventoryDetail.as_view(), name='inventory'),
     path('sign-up/', SignUp.as_view(), name='sign-up'),
     path('sign-in/', SignIn.as_view(), name='sign-in'),

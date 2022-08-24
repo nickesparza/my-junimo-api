@@ -45,7 +45,7 @@ class InventoryView(generics.ListCreateAPIView):
     #     # If the data is not valid, return a response with the errors
     #     return Response(character.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# TODO: GET THIS SORTED
+
 # need to return an index for inventory conncected to ONE CHARACTER
 class InventoryDetail(generics.ListCreateAPIView):
     permission_classes=(IsAuthenticated,)
@@ -62,6 +62,7 @@ class InventoryDetail(generics.ListCreateAPIView):
         data = InventorySerializer(inventory, many=True).data
         return Response({ 'inventory': data })
 
+    # TODO: GET THESE TWO SORTED
     def delete(self, request, pk):
         """Delete request"""
         # Locate mango to delete
