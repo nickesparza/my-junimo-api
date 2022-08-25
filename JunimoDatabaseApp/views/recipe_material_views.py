@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from django.middleware.csrf import get_token
 
 from ..models.blueprint import Blueprint
-# from ..models.material import Material
 from ..models.recipe_material import RecipeMaterial
 from ..serializers import RecipeMaterialSerializer
 
@@ -37,11 +36,3 @@ class RecipeMaterialDetailView(generics.RetrieveUpdateDestroyAPIView):
         # Run the data through the serializer so it's formatted
         data = RecipeMaterialSerializer(recipe_material).data
         return Response({ 'recipe_materials': data })
-
-        # Locate the resource to show
-        # GET THIS SORTED FOR JOIN TABLES
-        # # blueprint = get_object_or_404(BlueprintDetail, pk=fk)
-        # recipe_materials = RecipeMaterials.objects.filter(resource_id=fk)
-        # # Run the data through the serializer so it's formatted
-        # data = RecipeMaterialSerializer(recipe_materials, many=True).data
-        # return Response({ 'recipe_materials': data })

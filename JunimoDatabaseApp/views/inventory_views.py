@@ -41,9 +41,6 @@ class ShowInventoryView(generics.RetrieveUpdateDestroyAPIView):
         # Only do request if they own the character whose inventory it is
         if request.user != character.owner:
             raise PermissionDenied('Unauthorized, you do not own this character')
-        # Only do request if they own the character whose inventory it is
-        if request.user != character.owner:
-            raise PermissionDenied('Unauthorized, you do not own this character')
             # If pass...
         # print the request data
         print(request.data)

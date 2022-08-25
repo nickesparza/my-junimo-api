@@ -8,9 +8,7 @@ from .models.blueprint import Blueprint
 from .models.inventory import Inventory
 from .models.recipe_material import RecipeMaterial
 from .models.user import User
-from JunimoDatabaseApp.models import material
 
-from JunimoDatabaseApp.models import inventory
 
 # class MangoSerializer(serializers.ModelSerializer):
 #     class Meta:
