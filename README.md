@@ -108,5 +108,5 @@ We have provided seed data for all materials and blueprints, as well as provided
 ## Seeding Materials
 * In the terminal, run ```python manage.py runscript load_resources```. This will seed the database with materials.
 * In the terminal, run ```python manage.py runscript load_blueprints```. This will seed the database with blueprints!
-* From there, run a GET request to get the primary keys and names for all materials and blueprints. 
-* TODO: create a helper csv file for inventory and recipe_materials.
+* <strong>PROVIDED THAT YOU HAVE ONLY RUN THE SEEDED FILES ONCE RESPECTIVELY AND ARE DEALING WITH A "CLEAN" DATABASE...</strong> (that is, a database where the IDs for materials and blueprints start at "1".)
+* In the terminal, run ```python manage.py runscript recipe_materials```. This will seed the database with the information that connects the materials and blueprints with their amount needed!
