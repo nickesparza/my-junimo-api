@@ -6,8 +6,9 @@ from django.shortcuts import get_object_or_404
 from django.db import models
 
 from ..models.character import Character
-# from ..models.inventory import Inventory
-from ..serializers import CharacterSerializer
+# from ..models.inventory import Inventory, create
+from ..serializers import CharacterSerializer, InventorySerializer
+
 
 # Create your views here.
 class Characters(generics.ListCreateAPIView):
@@ -22,10 +23,11 @@ class Characters(generics.ListCreateAPIView):
         data = CharacterSerializer(characters, many=True).data
         return Response({ 'characters': data })
 
-    # def seed_inventory(cls, char_id):
+    # def seed_inventory(self, request):
     #     # use this to seed the inventory upon character creation
-    #     inventory = cls(char_id=char_id)
-    #     return inventory
+    #     inventory = InventorySerializer(request.data)
+    #     return Response({ 'inventory': inventory.data }, status=status.HTTP_201_CREATED)
+
         
     def post(self, request):
         """Create request"""
@@ -126,8 +128,6 @@ class Characters(generics.ListCreateAPIView):
             #     Inventory(80, char_id, 0),
             # ]
             # Inventory.create(inventory_entries)
-
-            # models.signals.post_save.connect(create_inventory)
             #######################
             return Response({ 'character': character.data }, status=status.HTTP_201_CREATED)
         # If the data is not valid, return a response with the errors
