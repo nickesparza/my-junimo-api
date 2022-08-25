@@ -33,11 +33,11 @@ class MaterialSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# for serializer
+# for serializer SPECIFICALLY for GET routes (read only)
 # character name, character id, resource name, resource id, resource image, amount
 class InventorySerializer(serializers.ModelSerializer):
-    material = MaterialSerializer(source='material_id')
-    character = CharacterSerializer(source='character_id')
+    material = MaterialSerializer(source='material_id', read_only=True)
+    character = CharacterSerializer(source='character_id', read_only=True)
     class Meta:
         model = Inventory
         fields = ('material', 'character', 'amount', 'id')
@@ -50,18 +50,35 @@ class InventorySerializer(serializers.ModelSerializer):
                 'read_only': True
             }
         }
-    def create(self, validated_data):
-        material_validated_data = validated_data.pop('material_id')
-        character_validated_data = validated_data.pop('character_id')
-        amount_validated_data = validated_data.pop('amount')
-        print(validated_data)
-        inventory = Inventory.objects.create(**validated_data)
-        # choice_set_serializer = self.fields['choice_set']
-        # for each in choice_validated_data:
-        #     each['question'] = question
-        # choices = choice_set_serializer.create(choice_validated_data)
-        return inventory
 
+
+
+# # if the issue is that the InventorySerializer is expecting more fields, do we need that? 
+# # Can we make a simpler serializer SPECIFICALLY for post/patch?
+# for serializer SPECIFICALLY for PATCH/POST routes
+class UpdateInventorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inventory
+        fields = ('__all__')
+        
+    # def create(self, validated_data):
+    #     material_validated_data = validated_data.pop('material')
+    #     character_validated_data = validated_data.pop('character')
+    #     amount_validated_data = validated_data.pop('amount')
+    #     inventory = Inventory.objects.create(**validated_data)
+    #     return inventory
+
+    # def update(self, instance, validated_data):
+    #     material_validated_data = validated_data.pop('material')
+    #     character_validated_data = validated_data.pop('character')
+    #     amount_validated_data = validated_data.pop('amount')
+    #     # instance.material_id = validated_data.get('material_id', instance.material_id)
+    #     # instance.character_id = validated_data.get('character_id', instance.character_id)
+    #     instance.material = validated_data.get('material', instance.material)
+    #     instance.character = validated_data.get('character', instance.character)
+    #     instance.amount = validated_data.get('amount', instance.amount)
+    #     instance.save()
+    #     return instance
 
 class RecipeMaterialSerializer(serializers.ModelSerializer):
     material = MaterialSerializer(source='material_id')
