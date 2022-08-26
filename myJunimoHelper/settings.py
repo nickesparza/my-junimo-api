@@ -29,28 +29,18 @@ if os.getenv('ENV') == 'development':
     }
     # Set debug to true
     DEBUG = True
-    # Only allow locally running client at port 3000 for CORs
+    # Only allow locally running client at port 3000 for COR
     CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
 else:
     # If we are on production, use the dj_database_url package
     # to locate the database based on Heroku setup
-    DB = {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangojunimo',
-        'USER': 'meldnmbkfpxpzb',
-        'PASSWORD': '18c8d978235ab8917fa73b45e15a898ff6f59cf442e5655021461822538e3b85',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-    # # Set debug to false
-    # DEBUG = False
-    # # Only allow the `CLIENT_ORIGIN` for CORS
-    # CORS_ORIGIN_WHITELIST = [
-    #     os.getenv('CLIENT_ORIGIN')
-    # ]
-
-# postgres://meldnmbkfpxpzb:18c8d978235ab8917fa73b45e15a898ff6f59cf442e5655021461822538e3b85@ec2-3-225-110-188.compute-1.amazonaws.com:5432/d5qfm0ah35uihj
-
+    DB = dj_database_url.config()
+    # Set debug to false
+    DEBUG = False
+    # Only allow the `CLIENT_ORIGIN` for CORS
+    CORS_ORIGIN_WHITELIST = [
+        os.getenv('CLIENT_ORIGIN')
+    ]
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -59,16 +49,6 @@ else:
 DATABASES = {
     'default': DB
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'datanz',
-#         'USER': 'xxxx',
-#         'PASSWORD': 'xxxx',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
