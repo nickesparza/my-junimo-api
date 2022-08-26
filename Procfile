@@ -1,2 +1,2 @@
-web: python myJunimoHelper/manage.py runserver 0.0.0.0:$PORT
+web: gunicorn myJunimoHelper.wsgi
 release: python manage.py migrate
