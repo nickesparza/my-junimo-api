@@ -1,7 +1,7 @@
 """Sets up the package"""
 
 #!/usr/bin/env python
- # -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 
 # Learn more: https://github.com/kennethreitz/setup.py
 
@@ -15,7 +15,7 @@ with open('LICENSE.md') as f:
 
 setup(
     name='myJunimoHelper',
-    version='0.1.0',
+    version='1.0.0',
     description='Django Auth back end for myJunimoHelper',
     long_description=README,
     author='<author>',
