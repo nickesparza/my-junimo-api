@@ -1,6 +1,9 @@
 import csv
 import os
 from ..models.recipe_material import RecipeMaterial
+from ..models.blueprint import Blueprint
+from ..models.material import Material
+from django.shortcuts import get_object_or_404
 
 def run():
     file = open('JunimoDatabaseApp/scripts/recipe_materials.csv')
@@ -13,10 +16,10 @@ def run():
     count = 1 
 
     # add in resources from csv
-    for recipematerial in read_file:
+    for blueprint_material in read_file:
         if count==1:
             pass
         else:
-            print(recipematerial) #optional
-            RecipeMaterial.objects.create(resource_id=recipematerial[0], blueprint_id=recipematerial[1], amount_needed=recipematerial[2])
+            print(blueprint_material) #optional
+            RecipeMaterial.objects.create(blueprint_id=get_object_or_404(Blueprint, pk=blueprint_material[0]), material_id=get_object_or_404(Material, pk=blueprint_material[1]), amount_needed=blueprint_material[2])
         count=count+1
