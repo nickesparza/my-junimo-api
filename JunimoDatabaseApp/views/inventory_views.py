@@ -35,11 +35,11 @@ class ShowInventoryView(generics.RetrieveUpdateDestroyAPIView):
 
     # THESE ARE TRICKY DUE TO NESTED DATA
     # create an entry in inventory
-    def post(self, request, pk, fk):
+    def post(self, request, pk):
         # this would work for patch better
         """Create request"""
         # Filter the characters by owner, so you can only see your owned characters
-        character = get_object_or_404(Character, pk=fk)
+        character = get_object_or_404(Character, pk=pk)
         # Only do request if they own the character whose inventory it is
         if request.user != character.owner:
             raise PermissionDenied('Unauthorized, you do not own this character')

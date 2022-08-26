@@ -21,8 +21,10 @@ urlpatterns = [
     path('inventory/<int:pk>/', InventoryDetail.as_view(), name='inventory'),
     # get - one inventory
     path('inventory/<int:pk>/<int:fk>', ShowInventoryView.as_view(), name='show_single_inventory'),
-    # for patch/post/delete
+    # for patch/delete
     path('inventory/edit/<int:pk>/<int:fk>', ShowInventoryView.as_view(), name='patch_single_inventory'),
+    # for post/delete
+    path('inventory/create/<int:pk>', ShowInventoryView.as_view(), name='create_inventory'),
     path('sign-up/', SignUp.as_view(), name='sign-up'),
     path('sign-in/', SignIn.as_view(), name='sign-in'),
     path('sign-out/', SignOut.as_view(), name='sign-out'),
