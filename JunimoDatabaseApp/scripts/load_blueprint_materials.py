@@ -6,7 +6,7 @@ from ..models.material import Material
 from django.shortcuts import get_object_or_404
 
 def run():
-    file = open('JunimoDatabaseApp/scripts/recipe_materials.csv')
+    file = open('JunimoDatabaseApp/scripts/blueprint_materials.csv')
     read_file=csv.reader(file)
 
     #optional - clears database of existing values
