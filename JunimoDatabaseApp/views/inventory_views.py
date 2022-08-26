@@ -18,6 +18,8 @@ from ..serializers import InventorySerializer, UpdateInventorySerializer
 # this will affect ONE inventory entry for ONE character
 class ShowInventoryView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=(IsAuthenticated,)
+    
+
     def get(self, request, pk, fk):
         """Index request"""
         # Filter the characters by owner, so you can only see your owned characters

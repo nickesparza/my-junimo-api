@@ -6,8 +6,9 @@ from django.shortcuts import get_object_or_404
 from django.db import models
 
 from ..models.character import Character
-# from ..models.inventory import Inventory
-from ..serializers import CharacterSerializer
+from ..models.inventory import Inventory
+from ..serializers import CharacterSerializer, InventorySerializer
+
 
 # Create your views here.
 class Characters(generics.ListCreateAPIView):
@@ -22,10 +23,11 @@ class Characters(generics.ListCreateAPIView):
         data = CharacterSerializer(characters, many=True).data
         return Response({ 'characters': data })
 
-    # def seed_inventory(cls, char_id):
-    #     # use this to seed the inventory upon character creation
-    #     inventory = cls(char_id=char_id)
-    #     return inventory
+    # # def seed_inventory(self, request):
+    # #     # use this to seed the inventory upon character creation
+    #     inventory = InventorySerializer(1, char_id, 0)
+    # #     return Response({ 'inventory': inventory.data }, status=status.HTTP_201_CREATED)
+
         
     def post(self, request):
         """Create request"""
@@ -43,8 +45,13 @@ class Characters(generics.ListCreateAPIView):
             #######################
             # # IF WE WANT TO AUTOMATICALLY CREATE SEVERAL AMOUNT=0 INSTANCES OF INVENTORY ATTACHED TO THIS NEWLY CREATED CHARACTER...
             # # HERE IS WHERE IT GOES (USING POST.SAVE?)
-            # inventory_entries = [
-            #     Inventory(1, char_id, 0),
+            # inventory_one =  Inventory(1, char_id, 0)
+            inventory_1 = InventorySerializer(data = (1, char_id, 0))
+            if inventory_1.is_valid():
+                inventory = inventory_1.save()
+                return
+            
+            
             #     Inventory(2, char_id, 0),
             #     Inventory(3, char_id, 0),
             #     Inventory(4, char_id, 0),
@@ -126,10 +133,8 @@ class Characters(generics.ListCreateAPIView):
             #     Inventory(80, char_id, 0),
             # ]
             # Inventory.create(inventory_entries)
-
-            # models.signals.post_save.connect(create_inventory)
             #######################
-            return Response({ 'character': character.data }, status=status.HTTP_201_CREATED)
+            return Response({ 'character': character.data, 'inventory': inventory_1.data }, status=status.HTTP_201_CREATED)
         # If the data is not valid, return a response with the errors
         return Response(character.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -18,7 +18,7 @@ class Inventory(models.Model):
     def __str__(self):
         return ("{}'s {}".format(self.character_id, self.material_id) )
 
-    # def create(cls):
+    # def create(char_id):
     #     # use this to seed the inventory upon character creation
     #     inventory = UpdateInventorySerializer(data=char_id)
     #     # If the inventory data is valid according to our serializer...
