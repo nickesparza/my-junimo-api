@@ -29,6 +29,7 @@ if os.getenv('ENV') == 'development':
         'USER': 'postgres',
         'PASSWORD': 'justsaynoRamona!09'
     }
+    
     # Set debug to true
     DEBUG = True
     # Only allow locally running client at port 3000 for COR
